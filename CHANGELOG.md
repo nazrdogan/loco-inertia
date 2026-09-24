@@ -2,7 +2,7 @@
 
 Both crates (`inertia-axum`, `loco-inertia`) share one version.
 
-## Unreleased
+## 0.1.2 — 2026-09-25
 
 - Every public item is documented; `missing_docs` keeps it that way.
 - `rust-version` declared and tested: 1.88 for `inertia-axum`, 1.94 for `loco-inertia`.

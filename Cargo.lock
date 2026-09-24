@@ -1018,7 +1018,7 @@ dependencies = [
 
 [[package]]
 name = "demo"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "async-trait",
  "axum",
@@ -1837,7 +1837,7 @@ dependencies = [
 
 [[package]]
 name = "inertia-axum"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "axum",
  "axum-extra",
@@ -2089,7 +2089,7 @@ dependencies = [
 
 [[package]]
 name = "loco-inertia"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "async-trait",
  "axum",
