@@ -38,6 +38,7 @@ impl SharedProps {
         extensions.get_or_insert_default::<Self>()
     }
 
+    /// Share `prop` under `key`, replacing an earlier one.
     pub fn insert(&self, key: impl Into<String>, prop: impl IntoProp) {
         self.lock().props.insert(key, prop);
     }

@@ -21,6 +21,8 @@
 //!     .layer(Extension(config));
 //! ```
 
+#![warn(missing_docs)]
+
 mod config;
 #[cfg(feature = "cookie-flash")]
 mod cookie_flash;

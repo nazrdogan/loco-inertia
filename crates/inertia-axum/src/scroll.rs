@@ -9,10 +9,12 @@ use serde_json::Value;
 #[derive(Debug, Clone, Default, PartialEq, Serialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS))]
 pub struct ScrollData<T> {
+    /// The items of this page.
     pub data: Vec<T>,
 }
 
 impl<T> ScrollData<T> {
+    /// Wrap one page of items.
     pub fn new(data: Vec<T>) -> Self {
         Self { data }
     }
@@ -34,11 +36,14 @@ pub struct ScrollMeta {
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub enum MergeIntent {
     #[default]
+    /// After the loaded items (scrolling down).
     Append,
+    /// Before the loaded items (scrolling up).
     Prepend,
 }
 
 impl MergeIntent {
+    /// Parse the header value: `prepend` (any case), else append.
     pub fn from_header(value: Option<&str>) -> Self {
         match value.map(str::trim) {
             Some(v) if v.eq_ignore_ascii_case("prepend") => Self::Prepend,

@@ -8,6 +8,8 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
+# Tested: the full test suite passes on 1.88 (the newest `rust-version` among its dependencies).
+rust-version = "1.88"
 
 [dependencies]
 axum = { workspace = true }

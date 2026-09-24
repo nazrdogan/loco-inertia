@@ -25,27 +25,36 @@ use std::{
 use loco_rs::{Error, Result};
 use serde::{Deserialize, Serialize};
 
+/// Default for `settings.inertia.vite.manifest`.
 pub const DEFAULT_MANIFEST: &str = "frontend/dist/.vite/manifest.json";
 
 /// `settings.inertia.vite`.
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ViteSettings {
+    /// The entry `vite()` uses when the template names none, e.g. `src/main.tsx`.
     pub entry: Option<String>,
+    /// Vite dev server origin; when set, tags point at it and the manifest is not read.
     pub dev_server: Option<String>,
+    /// Build manifest; defaults to [`DEFAULT_MANIFEST`].
     pub manifest: Option<PathBuf>,
+    /// URL prefix of the built files (Vite's `base`); defaults to `/`.
     pub base: Option<String>,
     #[serde(default)]
+    /// Dev server: inject the `@vitejs/plugin-react` Refresh preamble.
     pub react_refresh: bool,
 }
 
 /// One chunk of the Vite build manifest.
 #[derive(Debug, Clone, Deserialize)]
 pub struct Chunk {
+    /// The built file, relative to `base`.
     pub file: String,
     #[serde(default)]
+    /// Manifest keys of the chunks this one imports statically.
     pub imports: Vec<String>,
     #[serde(default)]
+    /// CSS files of this chunk.
     pub css: Vec<String>,
 }
 
@@ -93,6 +102,7 @@ impl Vite {
         Self::from_manifest_bytes(&bytes, base)
     }
 
+    /// Like [`Vite::from_manifest`], from the manifest's contents.
     pub fn from_manifest_bytes(bytes: &[u8], base: impl Into<String>) -> Result<Self> {
         let chunks: HashMap<String, Chunk> = serde_json::from_slice(bytes)
             .map_err(|e| Error::Message(format!("invalid Vite manifest: {e}")))?;
@@ -110,6 +120,7 @@ impl Vite {
         })
     }
 
+    /// From `settings.inertia.vite`: the dev server when `dev_server` is set, else the manifest.
     pub fn from_settings(settings: &ViteSettings) -> Result<Self> {
         let vite = match &settings.dev_server {
             Some(origin) => Self::dev(origin, settings.react_refresh),
@@ -125,6 +136,7 @@ impl Vite {
     }
 
     #[must_use]
+    /// The entry `vite()` uses when the template names none.
     pub fn with_default_entry(mut self, entry: Option<String>) -> Self {
         self.default_entry = entry;
         self

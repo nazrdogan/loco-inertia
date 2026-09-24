@@ -2,11 +2,13 @@ use std::{fmt, sync::Arc};
 
 use crate::{CircuitBreaker, Page, SsrRenderer};
 
+/// Error type of fallible callbacks: the root template, lazy props, SSR.
 pub type BoxError = Box<dyn std::error::Error + Send + Sync>;
 
 /// What the root template receives on a first (non-Inertia) visit.
 #[derive(Debug)]
 pub struct RootView<'a> {
+    /// The page being rendered.
     pub page: &'a Page,
     /// The mount markup (`<script data-page=…>…</script><div id=…></div>`), server-rendered
     /// when SSR succeeded; insert it verbatim, without HTML-escaping, inside `<body>`.
@@ -22,8 +24,12 @@ pub type RootTemplate = Arc<dyn Fn(&RootView<'_>) -> Result<String, BoxError> + 
 /// `axum::Extension<InertiaConfig>`.
 #[derive(Clone)]
 pub struct InertiaConfig {
+    /// Current asset version. Inertia visits from clients with another one get a `409` and
+    /// reload the page; `None` counts as `""`.
     pub version: Option<String>,
+    /// Renders the HTML document of first visits.
     pub root_template: RootTemplate,
+    /// Id of the root element and `data-page` value of the page script (default `app`).
     pub app_id: String,
     /// Server-side renderer for first visits; `None` renders client-side only.
     pub ssr: Option<Arc<dyn SsrRenderer>>,
@@ -37,6 +43,8 @@ pub struct InertiaConfig {
 }
 
 impl InertiaConfig {
+    /// A config rendering first visits with `root_template`: no version, app id `app`,
+    /// no SSR.
     pub fn new<F>(root_template: F) -> Self
     where
         F: Fn(&RootView<'_>) -> Result<String, BoxError> + Send + Sync + 'static,
@@ -52,6 +60,7 @@ impl InertiaConfig {
     }
 
     #[must_use]
+    /// Encrypt every page in the browser history unless a handler says otherwise.
     pub fn with_encrypt_history(mut self, encrypt: bool) -> Self {
         self.encrypt_history = encrypt;
         self
@@ -81,12 +90,14 @@ impl InertiaConfig {
     }
 
     #[must_use]
+    /// Set the asset version, e.g. a hash of the build manifest.
     pub fn with_version(mut self, version: impl Into<String>) -> Self {
         self.version = Some(version.into());
         self
     }
 
     #[must_use]
+    /// Use another root element id than `app`.
     pub fn with_app_id(mut self, app_id: impl Into<String>) -> Self {
         self.app_id = app_id.into();
         self

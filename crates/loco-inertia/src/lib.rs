@@ -42,6 +42,8 @@
 //! The root template receives `inertia` (the mount markup, render it with `{{ inertia | safe }}`)
 //! and `page` (the page object, e.g. `{{ page.component }}`).
 
+#![warn(missing_docs)]
+
 use std::{collections::BTreeMap, path::Path, sync::Arc};
 
 use async_trait::async_trait;
@@ -73,13 +75,17 @@ pub const DEFAULT_ROOT_TEMPLATE: &str = "assets/views/inertia.html";
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct InertiaSettings {
+    /// Asset version; defaults to the Vite manifest hash when `vite` uses a manifest.
     pub version: Option<String>,
+    /// Tera root template file; defaults to [`DEFAULT_ROOT_TEMPLATE`].
     pub root_template: Option<String>,
+    /// Root element id; defaults to `app`.
     pub app_id: Option<String>,
     /// Key material for the flash cookie; at least 64 bytes.
     #[serde(skip_serializing)]
     pub flash_secret: Option<String>,
     #[serde(default)]
+    /// Mark the flash and CSRF cookies `Secure` (HTTPS only); enable in production.
     pub secure_cookies: bool,
     /// Encrypt every page in the browser history (`encryptHistory`); pages can override it
     /// with `Inertia::encrypt_history`.
@@ -118,8 +124,11 @@ pub struct CsrfSettings {
 /// protection. An `InertiaConfig` converts into a setup without either.
 #[derive(Clone, Debug)]
 pub struct Setup {
+    /// The adapter config.
     pub config: InertiaConfig,
+    /// The encrypted-cookie flash store, if any.
     pub flash: Option<CookieFlash>,
+    /// CSRF protection, if enabled.
     pub csrf: Option<Csrf>,
 }
 

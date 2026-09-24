@@ -7,22 +7,31 @@ use serde::Serialize;
 #[derive(Debug, Clone, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Page {
+    /// The page component the client renders, e.g. `Users/Index`.
     pub component: String,
+    /// The resolved props: a JSON object.
     pub props: serde_json::Value,
+    /// Path and query of the request, e.g. `/users?page=2`.
     pub url: String,
     /// Asset version; an empty string when the server has no version configured.
     pub version: String,
     #[serde(skip_serializing_if = "is_false")]
+    /// Make the client drop its history (and history encryption key).
     pub clear_history: bool,
     #[serde(skip_serializing_if = "is_false")]
+    /// Make the client encrypt this page in `history.state`.
     pub encrypt_history: bool,
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    /// Prop paths the client appends to (or shallow-merges into) its current value.
     pub merge_props: Vec<String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    /// Prop paths the client prepends to its current value.
     pub prepend_props: Vec<String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    /// Prop paths the client merges into its current value recursively.
     pub deep_merge_props: Vec<String>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    /// `<prop>.<field>` paths: merged items with the same field replace each other.
     pub match_props_on: Vec<String>,
     /// Deferred prop paths by group; only present on full (non-partial) visits.
     #[serde(skip_serializing_if = "BTreeMap::is_empty")]
@@ -42,6 +51,7 @@ pub struct Page {
 }
 
 impl Page {
+    /// A page without merge, defer, once, flash or history metadata.
     pub fn new(
         component: impl Into<String>,
         props: serde_json::Value,

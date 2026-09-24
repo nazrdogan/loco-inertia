@@ -86,6 +86,7 @@ pub struct InertiaGenerate {
 }
 
 impl InertiaGenerate {
+    /// The task for the app crate `pkg_name` (`Self::app_name()` in `Hooks`).
     pub fn new(pkg_name: impl Into<String>) -> Self {
         Self {
             pkg_name: pkg_name.into(),

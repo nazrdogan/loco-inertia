@@ -37,6 +37,7 @@ pub struct Props {
 }
 
 impl Props {
+    /// An empty group.
     pub fn new() -> Self {
         Self::default()
     }
@@ -67,10 +68,12 @@ impl Props {
         self
     }
 
+    /// No props at all.
     pub fn is_empty(&self) -> bool {
         self.entries.is_empty()
     }
 
+    /// Whether there is a top-level prop at `key`.
     pub fn contains_key(&self, key: &str) -> bool {
         self.entries.iter().any(|(k, _)| k == key)
     }
@@ -103,6 +106,7 @@ impl fmt::Debug for Props {
 /// Anything accepted as the props of a page: a [`Props`] tree or any `Serialize` value that
 /// serializes to a JSON object (or `null`/`()` for no props).
 pub trait IntoProps {
+    /// Convert into a prop tree; fails when a value does not serialize to a JSON object.
     fn into_props(self) -> Result<Props, BoxError>;
 }
 
@@ -126,6 +130,7 @@ impl Props {
 /// }
 /// ```
 pub trait InertiaPage {
+    /// The page component, as the frontend resolves it (e.g. `Users/Index`).
     const COMPONENT: &'static str;
 }
 
@@ -151,6 +156,7 @@ impl<T: Serialize> IntoProps for T {
 
 /// Anything that can sit at a key of [`Props`].
 pub trait IntoProp {
+    /// Convert into a prop.
     fn into_prop(self) -> Prop;
 }
 
@@ -440,11 +446,17 @@ pub struct PropRequest {
 /// Props resolved for one response plus the page metadata they produce.
 #[derive(Debug, Default)]
 pub struct Resolved {
+    /// The props sent in this response.
     pub props: Map<String, Value>,
+    /// See [`crate::Page::merge_props`].
     pub merge_props: Vec<String>,
+    /// See [`crate::Page::prepend_props`].
     pub prepend_props: Vec<String>,
+    /// See [`crate::Page::deep_merge_props`].
     pub deep_merge_props: Vec<String>,
+    /// See [`crate::Page::match_props_on`].
     pub match_props_on: Vec<String>,
+    /// Deferred prop paths left out of this response, by group.
     pub deferred_props: BTreeMap<String, Vec<String>>,
     /// Pagination metadata of the infinite scroll props in the response, by path.
     pub scroll_props: BTreeMap<String, Value>,

@@ -3,4 +3,8 @@
 /**
  * The wire shape of a scroll prop with the default wrapper: `{ "data": [...] }`.
  */
-export type ScrollData<T> = { data: Array<T>, };
+export type ScrollData<T> = { 
+/**
+ * The items of this page.
+ */
+data: Array<T>, };

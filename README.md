@@ -1,7 +1,7 @@
 # loco-inertia
 
 Inertia.js v3 server adapter for [Loco.rs](https://loco.rs) 1.x (axum).
-Needs Rust 1.94+ (pinned in `rust-toolchain.toml`).
+Needs Rust 1.94+ (Loco's minimum); `inertia-axum` alone needs 1.88+.
 
 - `crates/inertia-axum` — the protocol for any axum app (no Loco); published separately.
 - `crates/loco-inertia` — Loco `Initializer`, `settings.inertia` config, Tera root template.

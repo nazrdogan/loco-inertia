@@ -111,7 +111,9 @@ where
 pub struct UploadedFile {
     /// The name the browser sent, if any. Untrusted: do not use it as a path.
     pub file_name: Option<String>,
+    /// The `Content-Type` the browser sent. Untrusted: check the bytes when it matters.
     pub content_type: Option<String>,
+    /// The file contents.
     pub bytes: Bytes,
 }
 

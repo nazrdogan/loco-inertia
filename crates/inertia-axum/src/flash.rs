@@ -16,8 +16,10 @@ use crate::BoxError;
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct FlashData {
     #[serde(default, skip_serializing_if = "Map::is_empty")]
+    /// Validation errors by field, or by error bag and then field.
     pub errors: Map<String, Value>,
     #[serde(default, skip_serializing_if = "Map::is_empty")]
+    /// One-time data for the next page (`page.flash`).
     pub flash: Map<String, Value>,
     /// Clear the client's (encrypted) history on the next page, e.g. after logging out.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
@@ -25,6 +27,7 @@ pub struct FlashData {
 }
 
 impl FlashData {
+    /// Nothing to carry to the next request.
     pub fn is_empty(&self) -> bool {
         self.errors.is_empty() && self.flash.is_empty() && !self.clear_history
     }

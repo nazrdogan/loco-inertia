@@ -252,6 +252,7 @@ fn scroll_data_has_a_typescript_type() {
     use ts_rs::TS;
     assert_eq!(
         ScrollData::<u32>::decl(&ts_rs::Config::default()),
-        "type ScrollData<T> = { data: Array<T>, };"
+        // Rust doc comments carry over as JSDoc.
+        "type ScrollData<T> = { \n/**\n * The items of this page.\n */\ndata: Array<T>, };"
     );
 }

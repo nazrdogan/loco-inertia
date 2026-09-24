@@ -2,6 +2,13 @@
 
 Both crates (`inertia-axum`, `loco-inertia`) share one version.
 
+## Unreleased
+
+- Every public item is documented; `missing_docs` keeps it that way.
+- `rust-version` declared and tested: 1.88 for `inertia-axum`, 1.94 for `loco-inertia`.
+- `ScrollData`'s TypeScript type carries the field's doc comment.
+- Demo: production config uses Loco's YAML-safe `<%= %>` template delimiters.
+
 ## 0.1.1 — 2026-09-24
 
 - docs.rs builds `inertia-axum` with all features, so `Csrf`, `CookieFlash`, `HttpSsr` and

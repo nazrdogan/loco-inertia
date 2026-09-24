@@ -23,6 +23,7 @@ pub struct CookieFlash {
 }
 
 impl CookieFlash {
+    /// Flash cookies encrypted with `key`: cookie `inertia_flash`, not `Secure`.
     pub fn new(key: Key) -> Self {
         Self {
             key,
@@ -39,6 +40,7 @@ impl CookieFlash {
     }
 
     #[must_use]
+    /// Use another cookie name than `inertia_flash`.
     pub fn cookie_name(mut self, name: impl Into<String>) -> Self {
         self.cookie_name = name.into();
         self

@@ -7,9 +7,9 @@ logger:
   format: compact
 
 server:
-  port: {{ get_env(name="PORT", default="5150") }}
-  binding: {{ get_env(name="BINDING", default="0.0.0.0") }}
-  host: {{ get_env(name="HOST", default="http://localhost") }}
+  port: <%= get_env(name="PORT", default="5150") %>
+  binding: <%= get_env(name="BINDING", default="0.0.0.0") %>
+  host: <%= get_env(name="HOST", default="http://localhost") %>
   middlewares:
     # Built frontend (`npm run build` in frontend/), served under the Vite `base`.
     static:
@@ -36,7 +36,7 @@ settings:
     # First visits are rendered by the Node SSR server (`npm run ssr` in frontend/);
     # if it is down or slow, pages render client-side.
     ssr:
-      url: "{{ get_env(name="INERTIA_SSR_URL", default="http://127.0.0.1:13714") }}"
+      url: "<%= get_env(name="INERTIA_SSR_URL", default="http://127.0.0.1:13714") %>"
       timeout_ms: 1500
-    flash_secret: "{{ get_env(name="INERTIA_FLASH_SECRET") }}"
-    secure_cookies: {{ get_env(name="INERTIA_SECURE_COOKIES", default="true") }}
+    flash_secret: "<%= get_env(name="INERTIA_FLASH_SECRET") %>"
+    secure_cookies: <%= get_env(name="INERTIA_SECURE_COOKIES", default="true") %>

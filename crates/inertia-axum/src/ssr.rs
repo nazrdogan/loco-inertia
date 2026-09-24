@@ -17,6 +17,7 @@ use serde::Deserialize;
 
 use crate::{BoxError, Page};
 
+/// What [`SsrRenderer::render`] returns.
 pub type SsrFuture<'a> = Pin<Box<dyn Future<Output = Result<SsrResponse, BoxError>> + Send + 'a>>;
 
 /// What an SSR server returns for a page.
@@ -31,6 +32,7 @@ pub struct SsrResponse {
 
 /// Renders a page on the server. Only called for first (non-Inertia) visits.
 pub trait SsrRenderer: Send + Sync {
+    /// Render `page` to HTML; an error makes the page render client-side.
     fn render<'a>(&'a self, page: &'a Page) -> SsrFuture<'a>;
 }
 
@@ -55,6 +57,7 @@ pub const DEFAULT_SSR_FAILURE_THRESHOLD: u32 = 3;
 pub const DEFAULT_SSR_COOLDOWN: Duration = Duration::from_secs(30);
 
 impl<R: SsrRenderer> CircuitBreaker<R> {
+    /// Wrap `inner`: open after `threshold` failures in a row (at least 1), for `cooldown`.
     pub fn new(inner: R, threshold: u32, cooldown: Duration) -> Self {
         Self {
             inner,
@@ -152,6 +155,7 @@ mod http {
     }
 
     impl HttpSsr {
+        /// Where the Inertia SSR server listens by default.
         pub const DEFAULT_URL: &'static str = "http://127.0.0.1:13714";
 
         /// `url` is the server's base URL, e.g. [`HttpSsr::DEFAULT_URL`].
