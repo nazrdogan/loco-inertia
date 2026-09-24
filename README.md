@@ -178,5 +178,15 @@ Set `INERTIA_SECURE_COOKIES=false` to test the production build over plain HTTP.
 ## Tests
 
 ```sh
-cargo test --workspace --all-features
+cargo test --workspace --all-features   # unit, integration and form fuzz tests
+scripts/check.sh                        # everything: fmt, clippy, tests, types, e2e
+SKIP_E2E=1 scripts/check.sh             # the same without the browser tests
+```
+
+The end-to-end tests (`examples/demo/frontend/e2e/`) drive the real Inertia client in
+Google Chrome against the demo in production mode (built assets, SSR). To run them before
+every push, enable the versioned hook once per clone:
+
+```sh
+git config core.hooksPath .githooks     # `git push --no-verify` skips it
 ```

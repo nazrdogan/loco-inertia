@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Runs scripts/check.sh before every push; a failure cancels the push.
+# Enable once per clone: git config core.hooksPath .githooks
+# Skip in an emergency: git push --no-verify
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
+  echo "pre-push: note: uncommitted changes are included in the checks." >&2
+fi
+exec scripts/check.sh
