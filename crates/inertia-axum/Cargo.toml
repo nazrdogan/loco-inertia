@@ -39,3 +39,7 @@ tower = { workspace = true }
 http-body-util = { workspace = true }
 ts-rs = "12"
 axum-extra = { version = "0.10", features = ["cookie-signed"] }
+
+[package.metadata.docs.rs]
+# Document the optional features too (`Csrf`, `CookieFlash`, `HttpSsr`, …).
+all-features = true

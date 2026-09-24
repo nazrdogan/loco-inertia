@@ -5,7 +5,7 @@ members = ["crates/inertia-axum", "crates/loco-inertia", "examples/demo"]
 [workspace.package]
 edition = "2021"
 license = "MIT"
-version = "0.1.0"
+version = "0.1.1"
 repository = "https://github.com/nazrdogan/loco-inertia"
 
 [workspace.dependencies]

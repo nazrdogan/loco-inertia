@@ -10,7 +10,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
-inertia-axum = { path = "../inertia-axum", version = "0.1.0", features = ["cookie-flash", "csrf", "ssr"] }
+inertia-axum = { path = "../inertia-axum", version = "0.1.1", features = ["cookie-flash", "csrf", "ssr"] }
 loco-rs = { version = "1.2", default-features = false }
 axum = { workspace = true, features = ["multipart"] }
 form_urlencoded = "1"
