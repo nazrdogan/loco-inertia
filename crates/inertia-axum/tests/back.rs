@@ -7,7 +7,7 @@ use axum::{
     routing::post,
     Extension, Router,
 };
-use inertia_core::{Inertia, InertiaConfig, RootView};
+use inertia_axum::{Inertia, InertiaConfig, RootView};
 use tower::ServiceExt;
 
 fn app(allowed_hosts: &[&str]) -> Router {

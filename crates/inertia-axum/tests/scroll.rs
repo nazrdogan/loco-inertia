@@ -10,7 +10,7 @@ use std::{
 
 use axum::{body::Body, http::Request, routing::get, Extension, Router};
 use http_body_util::BodyExt;
-use inertia_core::{Inertia, InertiaConfig, Prop, Props, RootView, ScrollData, ScrollMeta};
+use inertia_axum::{Inertia, InertiaConfig, Prop, Props, RootView, ScrollData, ScrollMeta};
 use serde_json::{json, Value};
 use tower::ServiceExt;
 
@@ -203,7 +203,7 @@ struct TypedFeed {
     posts: ScrollData<u32>,
 }
 
-impl inertia_core::InertiaPage for TypedFeed {
+impl inertia_axum::InertiaPage for TypedFeed {
     const COMPONENT: &'static str = "Feed";
 }
 

@@ -8,7 +8,7 @@ use axum::{
     Extension, Router,
 };
 use http_body_util::BodyExt;
-use inertia_core::{Inertia, InertiaConfig, RootView};
+use inertia_axum::{Inertia, InertiaConfig, RootView};
 use serde_json::{json, Value};
 use tower::ServiceExt;
 

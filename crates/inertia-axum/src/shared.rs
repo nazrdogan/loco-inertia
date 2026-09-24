@@ -10,7 +10,7 @@ use crate::{IntoProp, Props};
 ///
 /// ```
 /// use axum::{extract::Request, middleware::Next, response::Response};
-/// use inertia_core::SharedProps;
+/// use inertia_axum::SharedProps;
 ///
 /// async fn share(mut req: Request, next: Next) -> Response {
 ///     SharedProps::of(req.extensions_mut()).insert("app_name", "demo");

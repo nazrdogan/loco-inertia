@@ -1,11 +1,12 @@
 [workspace]
 resolver = "2"
-members = ["crates/inertia-core", "crates/loco-inertia", "examples/demo"]
+members = ["crates/inertia-axum", "crates/loco-inertia", "examples/demo"]
 
 [workspace.package]
 edition = "2021"
 license = "MIT"
 version = "0.1.0"
+repository = "https://github.com/nazrdogan/loco-inertia"
 
 [workspace.dependencies]
 axum = "0.8"

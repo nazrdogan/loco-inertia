@@ -4,7 +4,7 @@ logger:
   level: debug
   # Loco only logs its own crates by default; add the Inertia crates (SSR fallbacks,
   # prop resolution errors) to the list.
-  override_filter: "loco_rs=debug,tower_http=debug,demo=debug,inertia_core=debug,loco_inertia=debug"
+  override_filter: "loco_rs=debug,tower_http=debug,demo=debug,inertia_axum=debug,loco_inertia=debug"
   format: compact
 
 server:

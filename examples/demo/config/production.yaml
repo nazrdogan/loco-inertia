@@ -3,7 +3,7 @@ logger:
   level: info
   # Loco only logs its own crates by default; add the Inertia crates (SSR fallbacks,
   # prop resolution errors) to the list.
-  override_filter: "loco_rs=info,tower_http=info,demo=info,inertia_core=info,loco_inertia=info"
+  override_filter: "loco_rs=info,tower_http=info,demo=info,inertia_axum=info,loco_inertia=info"
   format: compact
 
 server:

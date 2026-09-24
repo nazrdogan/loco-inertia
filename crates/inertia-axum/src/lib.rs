@@ -5,13 +5,13 @@
 //!
 //! ```no_run
 //! use axum::{routing::get, Extension, Router};
-//! use inertia_core::{inertia_middleware, Inertia, InertiaConfig};
+//! use inertia_axum::{inertia_middleware, Inertia, InertiaConfig};
 //!
 //! async fn home(inertia: Inertia) -> axum::response::Response {
 //!     inertia.render("Home", serde_json::json!({ "greeting": "hi" })).await
 //! }
 //!
-//! let config = InertiaConfig::new(|view: &inertia_core::RootView<'_>| {
+//! let config = InertiaConfig::new(|view: &inertia_axum::RootView<'_>| {
 //!     Ok(format!("<!doctype html><html><body>{}</body></html>", view.body))
 //! });
 //! let app: Router = Router::new()

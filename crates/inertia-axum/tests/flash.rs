@@ -14,7 +14,7 @@ use axum::{
     Extension, Router,
 };
 use http_body_util::BodyExt;
-use inertia_core::{
+use inertia_axum::{
     cookie_flash_middleware, inertia_middleware, CookieFlash, CookieKey, FlashData, IncomingFlash,
     Inertia, InertiaConfig, OutgoingFlash, Prop, Props, RootView, SharedProps,
 };

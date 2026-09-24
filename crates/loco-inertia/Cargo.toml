@@ -1,12 +1,16 @@
 [package]
 name = "loco-inertia"
-description = "Inertia.js v3 adapter for Loco.rs"
+description = "Inertia.js v3 adapter for Loco.rs: typed pages, forms, Vite, SSR"
+readme = "../../README.md"
+keywords = ["inertia", "inertiajs", "loco", "axum", "ssr"]
+categories = ["web-programming", "web-programming::http-server"]
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
 
 [dependencies]
-inertia-core = { path = "../inertia-core", features = ["cookie-flash", "csrf", "ssr"] }
+inertia-axum = { path = "../inertia-axum", version = "0.1.0", features = ["cookie-flash", "csrf", "ssr"] }
 loco-rs = { version = "1.2", default-features = false }
 axum = { workspace = true, features = ["multipart"] }
 form_urlencoded = "1"
@@ -29,4 +33,4 @@ form_urlencoded = "1"
 [features]
 default = ["ts"]
 # `ts_rs::TS` on wire types such as `ScrollData<T>`.
-ts = ["inertia-core/ts"]
+ts = ["inertia-axum/ts"]

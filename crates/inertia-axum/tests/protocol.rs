@@ -7,7 +7,7 @@ use axum::{
     Extension, Router,
 };
 use http_body_util::BodyExt;
-use inertia_core::{inertia_middleware, Inertia, InertiaConfig, RootView};
+use inertia_axum::{inertia_middleware, Inertia, InertiaConfig, RootView};
 use serde_json::{json, Value};
 use tower::ServiceExt;
 
@@ -265,7 +265,7 @@ async fn custom_app_id_is_used_in_mount_markup() {
 
 #[tokio::test]
 async fn history_flags_are_omitted_unless_true() {
-    let mut page = inertia_core::Page::new("Home", json!({}), "/", "");
+    let mut page = inertia_axum::Page::new("Home", json!({}), "/", "");
     page.encrypt_history = true;
     let v = serde_json::to_value(&page).unwrap();
     assert_eq!(v.get("clearHistory"), None);

@@ -1,9 +1,13 @@
 [package]
-name = "inertia-core"
-description = "Inertia.js v3 server-side protocol for axum (framework-agnostic)"
+name = "inertia-axum"
+description = "Inertia.js v3 server-side protocol for axum: props, partial reloads, flash, CSRF, SSR"
+readme = "README.md"
+keywords = ["inertia", "inertiajs", "axum", "spa", "ssr"]
+categories = ["web-programming", "web-programming::http-server"]
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
 
 [dependencies]
 axum = { workspace = true }

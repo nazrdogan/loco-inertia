@@ -1,9 +1,9 @@
 # loco-inertia
 
-Inertia.js v3 server adapter for [Loco.rs](https://loco.rs) 1.x (axum). See `roadmap.md` for scope.
+Inertia.js v3 server adapter for [Loco.rs](https://loco.rs) 1.x (axum).
 Needs Rust 1.94+ (pinned in `rust-toolchain.toml`).
 
-- `crates/inertia-core` — protocol only (axum + serde, no Loco).
+- `crates/inertia-axum` — the protocol for any axum app (no Loco); published separately.
 - `crates/loco-inertia` — Loco `Initializer`, `settings.inertia` config, Tera root template.
 - `examples/demo` — Loco app + Vite + React 19 + `@inertiajs/react` v3.
 
@@ -166,7 +166,7 @@ client-side and a warning is logged; after 3 failures in a row SSR is skipped fo
 timeout to every first visit. Inertia (XHR) visits never touch it. The root
 template takes the SSR head via `{{ inertia_head | safe }}`.
 
-Loco only logs its own crates; add `inertia_core` and `loco_inertia` to
+Loco only logs its own crates; add `inertia_axum` and `loco_inertia` to
 `logger.override_filter` (see `examples/demo/config/*.yaml`) to see the adapter's logs.
 
 The root template calls `{{ vite() | safe }}`: dev-server tags in development, the built

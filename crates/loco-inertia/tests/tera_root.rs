@@ -172,13 +172,13 @@ fn ssr_settings() {
 #[tokio::test]
 async fn ssr_head_is_available_to_the_tera_template() {
     struct Fake;
-    impl loco_inertia::inertia_core::SsrRenderer for Fake {
+    impl loco_inertia::inertia_axum::SsrRenderer for Fake {
         fn render<'a>(
             &'a self,
             _page: &'a loco_inertia::Page,
-        ) -> loco_inertia::inertia_core::SsrFuture<'a> {
+        ) -> loco_inertia::inertia_axum::SsrFuture<'a> {
             Box::pin(async {
-                Ok(loco_inertia::inertia_core::SsrResponse {
+                Ok(loco_inertia::inertia_axum::SsrResponse {
                     head: vec!["<title inertia>From SSR</title>".into()],
                     body: "<div id=\"app\" data-server-rendered=\"true\">hi</div>".into(),
                 })

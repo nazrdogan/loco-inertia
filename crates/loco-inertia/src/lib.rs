@@ -1,4 +1,4 @@
-//! [Loco](https://loco.rs) integration for [`inertia_core`].
+//! [Loco](https://loco.rs) integration for [`inertia_axum`].
 //!
 //! Add [`InertiaLayer`] to `Hooks::middlewares`, in front of Loco's default stack so it runs
 //! inside Loco's request-id, logging and error handling layers:
@@ -31,9 +31,9 @@
 //! ```
 //!
 //! Loco's logger only passes events from its own whitelist of crates. To see this adapter's
-//! warnings and errors (SSR fallbacks, failing lazy props), add `inertia_core` and
+//! warnings and errors (SSR fallbacks, failing lazy props), add `inertia_axum` and
 //! `loco_inertia` via `logger.override_filter`, e.g.
-//! `"loco_rs=info,tower_http=info,my_app=info,inertia_core=info,loco_inertia=info"`.
+//! `"loco_rs=info,tower_http=info,my_app=info,inertia_axum=info,loco_inertia=info"`.
 //!
 //! `flash_secret` keys both the flash cookie and the CSRF token. Without it a random key is
 //! generated at boot, so flash data and CSRF tokens do not survive restarts or work across
@@ -60,7 +60,7 @@ pub use form::{InertiaForm, UploadedFile};
 pub use templates::InertiaGenerate;
 pub use vite::{Vite, ViteSettings};
 
-pub use inertia_core::{
+pub use inertia_axum::{
     self, cookie_flash_middleware, csrf_middleware, inertia_middleware, CookieFlash, CookieKey,
     Csrf, HttpSsr, Inertia, InertiaConfig, InertiaPage, InertiaRedirect, IntoProp, IntoProps, Page,
     Prop, Props, RootView, ScrollData, ScrollMeta, SharedProps,
@@ -285,9 +285,9 @@ impl InertiaSettings {
                     ssr,
                     settings
                         .failure_threshold
-                        .unwrap_or(inertia_core::DEFAULT_SSR_FAILURE_THRESHOLD),
+                        .unwrap_or(inertia_axum::DEFAULT_SSR_FAILURE_THRESHOLD),
                     settings.cooldown_secs.map_or(
-                        inertia_core::DEFAULT_SSR_COOLDOWN,
+                        inertia_axum::DEFAULT_SSR_COOLDOWN,
                         std::time::Duration::from_secs,
                     ),
                 );

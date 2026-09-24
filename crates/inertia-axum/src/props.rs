@@ -22,7 +22,7 @@ type LevelFuture<'a> =
 /// A group of named props. Keys may themselves hold nested [`Props`].
 ///
 /// ```
-/// use inertia_core::{Prop, Props};
+/// use inertia_axum::{Prop, Props};
 ///
 /// let props = Props::new()
 ///     .with("user", serde_json::json!({ "name": "Ann" }))
@@ -121,7 +121,7 @@ impl Props {
 /// #[derive(serde::Serialize)]
 /// struct HomeProps { greeting: String }
 ///
-/// impl inertia_core::InertiaPage for HomeProps {
+/// impl inertia_axum::InertiaPage for HomeProps {
 ///     const COMPONENT: &'static str = "Home";
 /// }
 /// ```

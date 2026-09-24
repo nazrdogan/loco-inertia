@@ -15,7 +15,7 @@ use axum::{
     Extension, Router,
 };
 use axum_extra::extract::cookie::Key;
-use inertia_core::{csrf_middleware, Csrf};
+use inertia_axum::{csrf_middleware, Csrf};
 use tower::ServiceExt;
 
 fn app(key: Key, hits: Arc<AtomicUsize>) -> Router {

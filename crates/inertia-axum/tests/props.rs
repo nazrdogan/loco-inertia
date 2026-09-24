@@ -15,7 +15,7 @@ use axum::{
     Extension, Router,
 };
 use http_body_util::BodyExt;
-use inertia_core::{inertia_middleware, Inertia, InertiaConfig, Prop, Props, RootView};
+use inertia_axum::{inertia_middleware, Inertia, InertiaConfig, Prop, Props, RootView};
 use serde_json::{json, Value};
 use tower::ServiceExt;
 
@@ -362,7 +362,7 @@ async fn lazy_default_props_are_skipped_when_not_requested() {
             Ok::<_, Infallible>(0)
         }),
     );
-    let req = inertia_core::PropRequest {
+    let req = inertia_axum::PropRequest {
         partial: true,
         only: vec!["a".into()],
         ..Default::default()
@@ -394,7 +394,7 @@ struct TypedProps {
     stats: Option<u32>,
 }
 
-impl inertia_core::InertiaPage for TypedProps {
+impl inertia_axum::InertiaPage for TypedProps {
     const COMPONENT: &'static str = "Typed/Show";
 }
 
@@ -469,7 +469,7 @@ async fn shared_props_can_be_extended_from_a_struct() {
         app_name: &'static str,
         version: u32,
     }
-    let shared = inertia_core::SharedProps::default();
+    let shared = inertia_axum::SharedProps::default();
     shared.insert("user", "ann");
     shared
         .extend(AppShared {
@@ -499,7 +499,7 @@ async fn sibling_lazy_props_resolve_concurrently() {
         .with("nested", Props::new().with("c", slow(3)));
     let started = std::time::Instant::now();
     let resolved = props
-        .resolve(&inertia_core::PropRequest::default())
+        .resolve(&inertia_axum::PropRequest::default())
         .await
         .unwrap();
     assert!(

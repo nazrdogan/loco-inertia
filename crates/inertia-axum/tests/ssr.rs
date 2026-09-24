@@ -13,7 +13,7 @@ use axum::{
     Json, Router,
 };
 use http_body_util::BodyExt;
-use inertia_core::{
+use inertia_axum::{
     HttpSsr, Inertia, InertiaConfig, Page, RootView, SsrFuture, SsrRenderer, SsrResponse,
 };
 use serde_json::{json, Value};
@@ -62,7 +62,7 @@ async fn ssr_server(behaviour: Behaviour) -> (String, Arc<Mutex<Vec<Value>>>) {
     (url, seen)
 }
 
-fn root(view: &RootView<'_>) -> Result<String, inertia_core::BoxError> {
+fn root(view: &RootView<'_>) -> Result<String, inertia_axum::BoxError> {
     Ok(format!(
         "<head>{}</head><body>{}</body>",
         view.head, view.body

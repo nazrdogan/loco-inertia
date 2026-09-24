@@ -10,7 +10,7 @@ use std::{
 
 use axum::{body::Body, http::Request, routing::get, Extension, Router};
 use http_body_util::BodyExt;
-use inertia_core::{Inertia, InertiaConfig, Page, RootView, SsrFuture, SsrRenderer, SsrResponse};
+use inertia_axum::{Inertia, InertiaConfig, Page, RootView, SsrFuture, SsrRenderer, SsrResponse};
 use tower::ServiceExt;
 
 /// A renderer that counts calls and fails until told otherwise.

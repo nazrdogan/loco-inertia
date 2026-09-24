@@ -12,7 +12,7 @@ use axum::{
     Extension, Router,
 };
 use http_body_util::BodyExt;
-use inertia_core::{
+use inertia_axum::{
     cookie_flash_middleware, inertia_middleware, CookieFlash, CookieKey, Inertia, InertiaConfig,
     RootView, MAX_FLASH_COOKIE_BYTES, OVERFLOW_ERROR_KEY,
 };
