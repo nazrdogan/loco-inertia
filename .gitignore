@@ -4,3 +4,4 @@ examples/demo/frontend/dist/
 examples/demo/frontend/ssr/
 examples/demo/frontend/test-results/
 examples/demo/frontend/playwright-report/
+roadmap.md
