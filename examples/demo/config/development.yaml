@@ -1,0 +1,26 @@
+logger:
+  enable: true
+  pretty_backtrace: true
+  level: debug
+  # Loco only logs its own crates by default; add the Inertia crates (SSR fallbacks,
+  # prop resolution errors) to the list.
+  override_filter: "loco_rs=debug,tower_http=debug,demo=debug,inertia_core=debug,loco_inertia=debug"
+  format: compact
+
+server:
+  port: 5150
+  binding: localhost
+  host: http://localhost
+
+workers:
+  mode: ForegroundBlocking
+
+settings:
+  inertia:
+    root_template: assets/views/inertia.html
+    # Development-only key; set a secret one (e.g. from an env var) in production.
+    vite:
+      entry: src/main.tsx
+      dev_server: http://localhost:5173
+      react_refresh: true
+    flash_secret: "dev-only-flash-secret-dev-only-flash-secret-dev-only-flash-secret"

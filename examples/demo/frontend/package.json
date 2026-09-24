@@ -1,0 +1,25 @@
+{
+  "name": "demo-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build && vite build --ssr src/ssr.tsx --outDir ssr",
+    "ssr": "node ssr/ssr.js",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@inertiajs/react": "^3.7.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1"
+  }
+}

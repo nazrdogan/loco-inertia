@@ -1,0 +1,42 @@
+logger:
+  enable: true
+  level: info
+  # Loco only logs its own crates by default; add the Inertia crates (SSR fallbacks,
+  # prop resolution errors) to the list.
+  override_filter: "loco_rs=info,tower_http=info,demo=info,inertia_core=info,loco_inertia=info"
+  format: compact
+
+server:
+  port: {{ get_env(name="PORT", default="5150") }}
+  binding: {{ get_env(name="BINDING", default="0.0.0.0") }}
+  host: {{ get_env(name="HOST", default="http://localhost") }}
+  middlewares:
+    # Built frontend (`npm run build` in frontend/), served under the Vite `base`.
+    static:
+      enable: true
+      must_exist: true
+      precompressed: false
+      folder:
+        uri: "/static"
+        path: "frontend/dist"
+      fallback: "assets/static/404.html"
+      cache_control: "public, max-age=31536000, immutable"
+
+workers:
+  mode: ForegroundBlocking
+
+settings:
+  inertia:
+    root_template: assets/views/inertia.html
+    # The asset version is the manifest hash: each build makes stale clients reload.
+    vite:
+      entry: src/main.tsx
+      manifest: frontend/dist/.vite/manifest.json
+      base: /static/
+    # First visits are rendered by the Node SSR server (`npm run ssr` in frontend/);
+    # if it is down or slow, pages render client-side.
+    ssr:
+      url: "{{ get_env(name="INERTIA_SSR_URL", default="http://127.0.0.1:13714") }}"
+      timeout_ms: 1500
+    flash_secret: "{{ get_env(name="INERTIA_FLASH_SECRET") }}"
+    secure_cookies: {{ get_env(name="INERTIA_SECURE_COOKIES", default="true") }}

@@ -1,0 +1,8 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+
+nav a[aria-current="page"] {
+  font-weight: 600;
+}

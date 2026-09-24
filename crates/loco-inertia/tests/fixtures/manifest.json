@@ -1,0 +1,31 @@
+{
+  "src/main.tsx": {
+    "file": "assets/main-4f2a.js",
+    "src": "src/main.tsx",
+    "isEntry": true,
+    "imports": ["_vendor-9c1d.js", "_shared-77aa.js"],
+    "dynamicImports": ["src/Pages/Lazy.tsx"],
+    "css": ["assets/main-1b2c.css"]
+  },
+  "src/admin.tsx": {
+    "file": "assets/admin-aa11.js",
+    "src": "src/admin.tsx",
+    "isEntry": true,
+    "imports": ["_vendor-9c1d.js"]
+  },
+  "_vendor-9c1d.js": {
+    "file": "assets/vendor-9c1d.js",
+    "imports": ["_shared-77aa.js"],
+    "css": ["assets/vendor-5e6f.css"]
+  },
+  "_shared-77aa.js": {
+    "file": "assets/shared-77aa.js",
+    "css": ["assets/vendor-5e6f.css"]
+  },
+  "src/Pages/Lazy.tsx": {
+    "file": "assets/Lazy-0d0d.js",
+    "src": "src/Pages/Lazy.tsx",
+    "isDynamicEntry": true,
+    "css": ["assets/Lazy-3e3e.css"]
+  }
+}
